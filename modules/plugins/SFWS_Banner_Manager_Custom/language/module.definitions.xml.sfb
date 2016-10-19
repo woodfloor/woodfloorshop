@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions version="1.0">
+ <group name="sfws_banner_manager_custom">
+  <string name="module_title"><![CDATA[Banner Manager Custom Plugin]]></string>
+  <string name="module_description"><![CDATA[With this plugin you can display banners on the pages of your store.]]></string>
+  <string name="top_level_admin_menu"><![CDATA[Banner Manager Custom]]></string>
+  <string name="child_admin_menu"><![CDATA[Manage]]></string>
+  <string name="admin_config_field_background_color" introduced="5.0.0"><![CDATA[Background Color]]></string>
+  <string name="admin_config_field_background_color_description" introduced="5.0.0"><![CDATA[html color code, e.g. #FFFFFF]]></string>
+  <string name="admin_config_field_border_color" introduced="5.0.0"><![CDATA[Border Color]]></string>
+  <string name="admin_config_field_border_color_description" introduced="5.0.0"><![CDATA[html color code, e.g. #000000]]></string>
+  <string name="admin_config_field_border_width" introduced="5.0.0"><![CDATA[Border Width]]></string>
+  <string name="admin_config_field_border_width_description" introduced="5.0.0"><![CDATA[numeric, e.g. 1]]></string>
+  <string name="admin_config_field_effect" introduced="5.0.0"><![CDATA[Effect]]></string>
+  <string name="admin_config_field_effect_description" introduced="5.0.0"><![CDATA[choose the effect for this banner]]></string>
+  <string name="admin_config_field_effect_pause" introduced="5.0.0"><![CDATA[Effect Pause]]></string>
+  <string name="admin_config_field_effect_pause_description" introduced="5.0.0"><![CDATA[set to enable a pause effect when the mouse hovers over this banner]]></string>
+  <string name="admin_config_field_effect_speed" introduced="5.0.0"><![CDATA[Effect Speed]]></string>
+  <string name="admin_config_field_effect_speed_description" introduced="5.0.0"><![CDATA[numeric, e.g. 500, defines the number of milliseconds it will take to transition from one banner to the next]]></string>
+  <string name="admin_config_field_effect_timeout" introduced="5.0.0"><![CDATA[Effect Timeout]]></string>
+  <string name="admin_config_field_effect_timeout_description" introduced="5.0.0"><![CDATA[numeric, e.g. 2000, defines how many milliseconds will elapse between the start of each transition]]></string>
+  <string name="admin_config_field_height" introduced="5.0.0"><![CDATA[Height]]></string>
+  <string name="admin_config_field_height_description" introduced="5.0.0"><![CDATA[numeric, e.g. 122, should be image height + 2 x padding + 2 x border width]]></string>
+  <string name="admin_config_field_padding" introduced="5.0.0"><![CDATA[Padding]]></string>
+  <string name="admin_config_field_padding_description" introduced="5.0.0"><![CDATA[numeric, e.g. 10]]></string>
+  <string name="admin_config_field_width" introduced="5.0.0"><![CDATA[Width]]></string>
+  <string name="admin_config_field_width_description" introduced="5.0.0"><![CDATA[numeric, e.g. 522, should be image width + 2 x padding + 2 x border width]]></string>
+  <string name="admin_config_field_status" introduced="5.0.0"><![CDATA[Status]]></string>
+  <string name="admin_config_field_status_description" introduced="5.0.0"><![CDATA[set to enable to display this banner]]></string>
+  <string name="admin_config_title_footer" introduced="5.0.0"><![CDATA[Footer Banner Settings]]></string>
+  <string name="admin_config_title_header" introduced="5.0.0"><![CDATA[Header Banner Settings]]></string>
+  <string name="admin_config_title_side" introduced="5.0.0"><![CDATA[Sidebox Banner Settings]]></string>
+  <string name="admin_manage_breadcrumb"><![CDATA[Banner Manager Custom]]></string>
+  <string name="admin_manage_tab"><![CDATA[Banner Manager Custom]]></string>
+  <string name="admin_manage_tab_add"><![CDATA[Add Image]]></string>
+  <string name="admin_manage_tab_addedit_general"><![CDATA[General]]></string>
+  <string name="admin_manage_tab_addedit_image"><![CDATA[Image]]></string>
+  <string name="admin_manage_form_page_field_height" introduced="5.0.0"><![CDATA[Height]]></string>
+  <string name="admin_manage_form_page_field_height_description" introduced="5.0.0"><![CDATA[(numeric, e.g. 100)]]></string>
+  <string name="admin_manage_form_page_field_image" introduced="5.0.0"><![CDATA[Image]]></string>
+  <string name="admin_manage_form_page_field_location" introduced="5.0.0"><![CDATA[Location]]></string>
+  <string name="admin_manage_form_page_field_location_0" introduced="5.0.0"><![CDATA[Not Assigned]]></string>
+  <string name="admin_manage_form_page_field_location_1" introduced="5.0.0"><![CDATA[Header]]></string>
+  <string name="admin_manage_form_page_field_location_2" introduced="5.0.0"><![CDATA[Footer]]></string>
+  <string name="admin_manage_form_page_field_location_3" introduced="5.0.0"><![CDATA[Sidebox]]></string>
+  <string name="admin_manage_form_page_field_manufacturer" introduced="5.0.0"><![CDATA[Manufacturer]]></string>
+  <string name="admin_manage_form_page_field_name" introduced="5.0.0"><![CDATA[Name]]></string>
+  <string name="admin_manage_form_page_field_order" introduced="5.0.0"><![CDATA[Order]]></string>
+  <string name="admin_manage_form_page_field_status" introduced="5.0.0"><![CDATA[Status]]></string>
+  <string name="admin_manage_form_page_field_upload" introduced="5.0.0"><![CDATA[Upload]]></string>
+  <string name="admin_manage_form_page_field_url" introduced="5.0.0"><![CDATA[URL]]></string>
+  <string name="admin_manage_form_page_field_url_target" introduced="5.0.0"><![CDATA[URL Target]]></string>
+  <string name="admin_manage_form_page_field_url_target_blank" introduced="5.0.0"><![CDATA[New Window]]></string>
+  <string name="admin_manage_form_page_field_url_target_self" introduced="5.0.0"><![CDATA[Same Window]]></string>
+  <string name="admin_manage_form_page_field_width" introduced="5.0.0"><![CDATA[Width]]></string>
+  <string name="admin_manage_form_page_field_width_description" introduced="5.0.0"><![CDATA[(numeric, e.g. 500)]]></string>
+  <string name="admin_manage_form_page_title" introduced="5.0.0"><![CDATA[Manage Banner Image]]></string>
+  <string name="admin_manage_list_heading_image" introduced="5.0.0"><![CDATA[Image]]></string>
+  <string name="admin_manage_list_heading_name" introduced="5.0.0"><![CDATA[Name]]></string>
+  <string name="admin_manage_list_heading_manufacturer_name" introduced="5.0.0"><![CDATA[Manufacturer]]></string>
+  <string name="admin_manage_list_heading_status" introduced="5.0.0"><![CDATA[Status]]></string>
+  <string name="admin_manage_list_heading_url" introduced="5.0.0"><![CDATA[URL]]></string>
+  <string name="admin_manage_list_title_footer" introduced="5.0.0"><![CDATA[Footer Banner Images]]></string>
+  <string name="admin_manage_list_title_header" introduced="5.0.0"><![CDATA[Header Banner Images]]></string>
+  <string name="admin_manage_list_title_notassigned" introduced="5.0.0"><![CDATA[Not Assigned Banner Images]]></string>
+  <string name="admin_manage_list_title_sidebox" introduced="5.0.0"><![CDATA[Sidebox Banner Images]]></string>
+  <string name="admin_manage_page_notify_update"><![CDATA[Banner updated successfully!]]></string>
+  <string name="admin_manage_page_error_update"><![CDATA[Failed to update banner!]]></string>
+  <string name="admin_manage_page_notify_add"><![CDATA[Banner successfully created!]]></string>
+  <string name="admin_manage_page_error_add"><![CDATA[Failed to create banner!]]></string>
+  <string name="admin_manage_page_notify_delete"><![CDATA[Banner successfully deleted!]]></string>
+  <string name="admin_manage_page_error_delete"><![CDATA[Failed to delete banner!]]></string>
+  <string name="admin_manage_page_notify_update_list"><![CDATA[Banner images status and order successfully updated!]]></string>
+  <string name="admin_manage_page_error_update_list"><![CDATA[No changes have been made to the banner images status or display order!]]></string>
+ </group>
+</definitions>

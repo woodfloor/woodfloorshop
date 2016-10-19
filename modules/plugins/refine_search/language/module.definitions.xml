@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions version="1.0">
+ <group name="refine_search">
+  <string name="module_title"><![CDATA[Refine Search (By Modsindex)]]></string>
+  <string name="title"><![CDATA[Refine Search]]></string>  
+  <string name="by"><![CDATA[By]]></string>
+  <string name="by_price"><![CDATA[By Price]]></string>
+  <string name="clear_all_filters"><![CDATA[Clear All Filters]]></string> 
+  <string name="category_filters"><![CDATA[Show Category Filters]]></string>
+  <string name="show_price_filters"><![CDATA[Show Price Filters]]></string>
+  <string name="price_inetrval"><![CDATA[Price Interval]]></string>
+  <string name="license_key"><![CDATA[License Key]]></string>
+  <string name="module_guide"><![CDATA[GUIDE]]></string>
+  <string name="txt_display_Link"><![CDATA[To Show Refine Search simply place  {$REFINE_SEARCH} in main.php template file]]></string>
+  <string name="txt_display_info"><![CDATA[To Show Refine Search result palce &lt;div id=&quot;product_list&quot;&gt; on line number 20 and &lt;/div&gt; on page end  in content.category.php template file for refrence see below image. ]]></string>
+ </group>
+</definitions>

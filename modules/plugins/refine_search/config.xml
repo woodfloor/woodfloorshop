@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<installer version="1.0">
+  <info>
+	<uid>refinesearch@modsindex.com</uid>
+	<type>plugins</type>
+	<folder>refine_search</folder>
+	<name><![CDATA[Refine Search (Modsindx)]]></name>
+	<description><![CDATA[Refine Search (Modsindex) integration]]></description>
+	<version>2.0.0</version>
+	<minVersion>5.0.0a</minVersion>
+	<maxVersion>5.1.*</maxVersion>
+	<creator><![CDATA[Modsindex, Ltd]]></creator>
+	<homepage><![CDATA[http://www.modsindex.com]]></homepage>
+  </info>
+  
+  <hooks>
+    <hook trigger="class.gui.css" enabled="1"><![CDATA[Refine Search Styling]]></hook>
+  	<hook trigger="class.gui.display" enabled="1"><![CDATA[Show Front box on category page]]></hook>	
+  </hooks>
+</installer>

@@ -1,0 +1,101 @@
+{*
+ * CubeCart v6
+ * ========================================
+ * CubeCart is a registered trade mark of CubeCart Limited
+ * Copyright CubeCart Limited 2015. All rights reserved.
+ * UK Private Limited Company No. 5323904
+ * ========================================
+ * Web:   http://www.cubecart.com
+ * Email:  sales@cubecart.com
+ * License:  GPL-3.0 https://www.gnu.org/licenses/quick-guide-gplv3.html
+ *}
+{if isset($ITEMS)}
+<form action="{$VAL_SELF}" method="post" enctype="multipart/form-data" class="autosubmit" id="checkout_form">
+   {if $INCLUDE_CHECKOUT}
+   {include file='templates/content.checkout.confirm.php'}
+   {/if}
+   <h2>{$LANG.checkout.your_basket}</h2>
+   {include file='templates/content.checkout.medium-up.php'}
+   {include file='templates/content.checkout.small.php'}
+   <div class="row">
+         <div class="small-8 columns text-right">
+            {$LANG.basket.coupon_add}
+         </div>
+         <div class="small-4 columns">
+            <input name="coupon" id="coupon" type="text" maxlength="25">
+         </div>
+      </div>
+   
+   {if $INCLUDE_CHECKOUT && !$DISABLE_GATEWAYS}
+   <div id="payment_method">
+      <h3>{$LANG.gateway.select}</h3>
+      <hr>
+      <div class="row">
+         <div class="small-12 columns">
+            <ul class="no-bullet center" id="gateway_error">
+               {foreach from=$GATEWAYS item=gateway}
+               <li>
+                  <input name="gateway" type="radio" value="{$gateway.folder}" id="{$gateway.folder}" required {$gateway.checked} rel="gateway_error"><label for="{$gateway.folder}">{$gateway.description}</label>
+                  {if !empty($gateway.help)}
+                  <a href="{$gateway.help}" class="info" title="{$LANG.common.information}"><i class="fa fa-info-circle"></i></a>
+                  {/if}
+               </li>
+               {/foreach}
+            </ul>
+            <div class="hide" id="validate_gateway_required">{$LANG.gateway.choose_payment}</div>
+         </div>
+      </div>
+   </div>
+   {/if}
+   <div class="clearfix">
+      <div class="show-for-medium-up"><a href="{$STORE_URL}/index.php?_a=basket&empty-basket=true" class="button alert left"><i class="fa fa-trash-o"></i> {$LANG.basket.basket_empty}</a></div>
+      <div class="show-for-medium-up"><button type="submit" name="update" class="button secondary left" value="{$LANG.basket.basket_update}"><i class="fa fa-refresh"></i> {$LANG.basket.basket_update}</button></div>
+      <div class="show-for-small-only"><button type="submit" name="update" class="button secondary left" value="{$LANG.basket.basket_update}"><i class="fa fa-refresh"></i> {$LANG.common.update}</button></div>
+      {if $DISABLE_CHECKOUT_BUTTON!==true}
+      <button type="submit" name="proceed" id="checkout_proceed" class="button right">{$CHECKOUT_BUTTON} <i class="fa fa-chevron-right"></i></button>
+      {/if}
+   </div>
+</form>
+{if $CHECKOUTS}
+<div class="row">
+   <div class="small-12 columns text-right">-- {$LANG.common.or} --</div>
+</div>
+{foreach from=$CHECKOUTS item=checkout}
+<div class="row">
+   <div class="small-12 columns text-right pad">{$checkout}</div>
+</div>
+{/foreach}
+{/if}
+
+{if $RELATED}
+<div class="show-for-medium-up">
+   <h2>{$LANG.catalogue.related_products}</h2>
+   <ul class="small-block-grid-5 no-bullet">
+      {foreach from=$RELATED item=product}
+      <li>
+         <a href="{$product.url}" title="{$product.name}"><img src="{$product.img_src}" class="th" alt="{$product.name}"></a>
+         <br>
+         <a href="{$product.url}" title="{$product.name}">{$product.name}</a>
+         <p>
+            
+            {if $product.ctrl_sale}
+            <span class="old_price">{if $product.price_m2}{$product.price_m2}{else}{$product.price}{/if}</span> <span class="sale_price">{if $product.sale_price_m2}{$product.sale_price_m2}{else}{$product.sale_price}{/if}</span>
+            {if $product.calc_status==1} per m<sup>2</sup>{/if}
+            {else}
+            {if $product.price_unformatted == '0.00'}
+               P.O.A.
+            {else}
+               {if $product.price_m2}{$product.price_m2}{else}{$product.price}{/if}
+               {if $product.calc_status==1} per m<sup>2</sup>{/if}
+            {/if}
+            {/if}
+         </p>
+      </li>
+      {/foreach}
+   </ul>
+</div>
+{/if}
+{else}
+<h2>{$LANG.checkout.your_basket}</h2>
+<p class="thickpad-top">{$LANG.basket.basket_is_empty}</p>
+{/if}

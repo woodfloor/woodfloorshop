@@ -1,0 +1,69 @@
+#filterBox ul li, .refineSearch ul li{
+	list-style:none;
+}
+.refineSearch .checked {
+    background: url("../images/checked.gif") no-repeat scroll 0 0 transparent;
+    font-weight: normal;
+    margin-left: 6px;
+    padding-left: 18px;
+	padding-top: 3px;
+}
+.refineSearch .unchecked {
+    background: url("../images/unchecked.gif") no-repeat scroll 0 0 transparent;
+    font-weight: normal;
+    margin-left: 6px;
+    padding-left: 18px;
+	padding-top: 0px;
+}
+.progress {
+    left: 45%;
+    position: fixed;
+    top: 50%;
+    z-index: 100;
+}
+
+.OptionTitle{
+	 border-bottom: 1px solid #5F225E;
+    color: #5F225E;
+    float: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    padding-bottom: 3px;
+    text-indent: 4px;
+    width: 100%;
+}
+.sidebar div.customScrollBox{ margin-bottom:0;}
+
+.body-content-loading-overlay {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #ddd;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    bottom: 0;
+    display: none;
+    left: 0;
+    opacity: 0.65;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1500;
+}
+.body-content-loading-spinner {
+    background-image: url("../images/loader3.gif");
+    height: 150px;
+    left: 50vw;
+    margin-left: -75px;
+    margin-top: -75px;
+    position: fixed;
+    top: 50vh;
+    width: 150px;
+}
+
+div.loading {
+    display: block;
+}

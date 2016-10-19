@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<installer version="1.0">
+  <info>
+	<uid>gateway-e_Payments_Interac@cubecart.com</uid>
+	<type>gateway</type>
+	<mobile_optimized>false</mobile_optimized>
+	<name><![CDATA[e_Payments_Interac]]></name>
+	<description><![CDATA[e-Payment Gateway]]></description>
+	<version>1.0.0</version>
+	<minVersion>5.0.0a</minVersion>
+	<maxVersion>6.0.*</maxVersion>
+	<creator><![CDATA[BubbaBoss]]></creator>
+	<homepage><![CDATA[http://www.ghost-powder.com]]></homepage>
+	<block>false</block>
+  </info>
+</installer>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ * CubeCart v6
+ * ========================================
+ * CubeCart is a registered trade mark of CubeCart Limited
+ * Copyright CubeCart Limited 2014. All rights reserved.
+ * UK Private Limited Company No. 5323904
+ * ========================================
+ * Web:   http://www.cubecart.com
+ * Email:  sales@cubecart.com
+-->
+<installer version="1.0">
+  <info>
+	<uid>cc_sqm_calc@cubecart.com</uid>
+	<type>plugins</type>
+	<mobile_optimized>true</mobile_optimized>
+	<name><![CDATA[Pack Calculator]]></name>
+	<description><![CDATA[Pack Calculator based on square meters]]></description>
+	<version>1.0.0</version>
+	<minVersion>6.0.0</minVersion>
+	<maxVersion>6.*.*</maxVersion>
+	<creator><![CDATA[CubeCart Limited]]></creator>
+	<homepage><![CDATA[http://www.cubecart.com]]></homepage>
+  </info>
+  
+  <hooks>
+	<hook trigger="admin.product.pre_display" enabled="1"><![CDATA[Add/Edit product form tab and fields]]></hook>
+	<hook trigger="class.cubecart.display_product" enabled="1"><![CDATA[Get extra product data]]></hook>
+  </hooks>
+</installer>

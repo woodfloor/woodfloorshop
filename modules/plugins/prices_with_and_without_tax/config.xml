@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<installer version="1.0">
+  <info>
+	<uid>prices_with_and_without_tax@noodleman.co.uk</uid>
+	<type>plugins</type>
+	<folder>prices_with_and_without_tax</folder>
+	<name><![CDATA[Prices With and Without Tax]]></name>
+	<description><![CDATA[This plugin makes new smarty variables available for use in your skin, allowing you to show the inclusive and exclusive tax prices to your customers.]]></description>
+	<version>1.0.4</version>
+	<minVersion>6.0.4</minVersion>
+	<maxVersion>6.0.*</maxVersion>
+	<creator><![CDATA[Noodleman]]></creator>
+	<homepage><![CDATA[http://www.noodleman.co.uk]]></homepage>
+  </info>
+  
+  <hooks>
+	<hook trigger="class.cubecart.display_product" enabled="1"><![CDATA[Noodleman :: Add Extra Smarty Variables to the Main Product Page]]></hook>
+	<hook trigger="class.catalogue.display_product_options" enabled="1"><![CDATA[Noodleman :: Add Extra Smarty Variables to Product Options]]></hook>
+	<hook trigger="class.cubecart.display_homepage" enabled="1"><![CDATA[Noodleman :: Add Extra Smarty Variables to Latest Products on the Home Page]]></hook>
+	<hook trigger="class.cubecart.display_category" enabled="1"><![CDATA[Noodleman :: Add Extra Smarty Variables to Products in the Category View]]></hook>
+	<hook trigger="class.gui.display_random_product" enabled="1"><![CDATA[Noodleman :: Add Extra Smarty Variables to Products in the Featured Product View]]></hook>
+	<hook trigger="class.gui.display_popular_products" enabled="1"><![CDATA[Noodleman :: Add Extra Smarty Variables to Products in the Best Sellers / Popular Products View]]></hook>
+	<hook trigger="controller.index" enabled="1"><![CDATA[Noodleman :: Global Display Price]]></hook>
+  </hooks>
+</installer>

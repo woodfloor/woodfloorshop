@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<installer version="1.0">
+  <info>
+	<uid>bannermanagercustom@semperfiwebservices.com</uid>
+	<type>plugins</type>
+	<folder>SFWS_Banner_Manager_Custom</folder>
+	<name><![CDATA[Banner Manager Custom]]></name>
+	<description><![CDATA[Banner Manager Custom Plugin By SemperFiWebServices]]></description>
+	<version>Custom</version>
+	<minVersion>6.0.0a</minVersion>
+	<maxVersion>6.0.*</maxVersion>
+	<creator><![CDATA[SemperFiWebServices]]></creator>
+	<homepage><![CDATA[http://www.semperfiwebservices.com]]></homepage>
+  </info>
+  <hooks>
+	<hook trigger="admin.navigation" enabled="1"><![CDATA[Admin Navigation Menu Items]]></hook>
+	<hook trigger="admin.manage_banners_custom" enabled="1"><![CDATA[Admin Manage Banners]]></hook>
+	<hook trigger="class.gui.display" enabled="1"><![CDATA[Display Banners]]></hook>
+  </hooks>
+</installer>

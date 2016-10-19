@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions version="1.0">
+ <group name="sfws_related_products">
+  <string name="module_title"><![CDATA[Related Products Plugin]]></string>
+  <string name="module_description"><![CDATA[With this plugin you can display specific or random related products for each product in your store.]]></string>
+  <string name="top_level_admin_menu"><![CDATA[Related Products]]></string>
+  <string name="child_admin_menu"><![CDATA[Manage]]></string>
+  <string name="admin_config_checkout_pages_status"><![CDATA[Checkout Pages Status]]></string>
+  <string name="admin_config_checkout_pages_random_status"><![CDATA[Checkout Pages Random Products Status]]></string>
+  <string name="admin_config_checkout_pages_amount"><![CDATA[Checkout Pages Amount]]></string>
+  <string name="admin_config_product_pages_status"><![CDATA[Product Pages Status]]></string>
+  <string name="admin_config_product_pages_random_status"><![CDATA[Product Pages Random Products Status]]></string>
+  <string name="admin_config_product_pages_amount"><![CDATA[Product Pages Amount]]></string>
+  <string name="admin_manage_breadcrumb"><![CDATA[Related Products]]></string>
+  <string name="admin_manage_tab"><![CDATA[Related Products]]></string>
+  <string name="admin_manage_page_title"><![CDATA[Manage Related Products]]></string>
+  <string name="admin_manage_page_description"><![CDATA[Use the form below to assign related products to a product in your store.]]></string>
+  <string name="admin_manage_page_please_select"><![CDATA[Please Select]]></string>
+  <string name="admin_manage_page_step_1"><![CDATA[1. Select the category: ]]></string>
+  <string name="admin_manage_page_step_2"><![CDATA[2. Select the product you want to assign related products to: ]]></string>
+  <string name="admin_manage_page_step_3"><![CDATA[3. Select the category you want to assign related products from: ]]></string>
+  <string name="admin_manage_page_step_4"><![CDATA[4. Assign the related products: ]]></string>
+  <string name="admin_manage_page_heading_assignment"><![CDATA[Assignment]]></string>
+  <string name="admin_manage_page_heading_product_id"><![CDATA[Product ID]]></string>
+  <string name="admin_manage_page_heading_product_code"><![CDATA[Product Code]]></string>
+  <string name="admin_manage_page_heading_product_image"><![CDATA[Product Image]]></string>
+  <string name="admin_manage_page_heading_product_name"><![CDATA[Product Name]]></string>
+  <string name="admin_manage_page_no_products_found"><![CDATA[No products found for the selected category]]></string>
+  <string name="admin_manage_page_notify"><![CDATA[Related products were set successfully!]]></string>
+  <string name="admin_manage_page_error"><![CDATA[Failed to set related products!]]></string>
+  <string name="admin_product_tab"><![CDATA[Related Products]]></string>
+  <string name="admin_product_tab_title"><![CDATA[Related Products]]></string>
+  <string name="admin_product_tab_heading_include" introduced="5.0.0"><![CDATA[Include]]></string>
+  <string name="admin_product_tab_heading_product" introduced="5.0.0"><![CDATA[Product]]></string>
+  <string name="store_checkout_pages_title"><![CDATA[Related Products]]></string>
+  <string name="store_product_pages_title"><![CDATA[Related Products]]></string>
+ </group>
+</definitions>

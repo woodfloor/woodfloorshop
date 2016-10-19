@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<installer version="1.0">
+  <info>
+	<uid>support@noodleman.co.uk</uid>
+	<type>plugins</type>
+	<folder>product_addons</folder>
+	<name><![CDATA[Product Addons]]></name>
+	<description><![CDATA[Product Addons]]></description>
+	<version>1.0.8</version>
+	<minVersion>5.2.14</minVersion>
+	<maxVersion>6.0.*</maxVersion>
+	<creator><![CDATA[Noodleman]]></creator>
+	<homepage><![CDATA[http://www.noodleman.co.uk]]></homepage>
+  </info>
+  
+  <hooks>
+  <hook trigger="admin.navigation" enabled="1"><![CDATA[Noodleman :: Navigation Menu Item]]></hook>
+  <hook trigger="admin.product.save.post_process" enabled="1"><![CDATA[Noodleman :: Save Addons]]></hook>
+  <hook trigger="class.cubecart.display_product" enabled="1"><![CDATA[Noodleman :: Product Page]]></hook>
+  <hook trigger="controller.index" enabled="1"><![CDATA[Listener]]></hook> 
+  <hook trigger="class.cart.get" enabled="1"><![CDATA[Cart Get]]></hook>
+  <hook trigger="class.cart.clear" enabled="1"><![CDATA[Empty Cart]]></hook>
+  <hook trigger="class.cart.construct.pre" enabled="1"><![CDATA[Construct Pre]]></hook>
+  <hook trigger="class.order.products.add.pre" enabled="1"><![CDATA[Order Inventory]]></hook>
+  <hook trigger="controller.admin" enabled="1"><![CDATA[Custom Admin JS]]></hook>
+  <hook trigger="admin.category.save.pre_process" enabled="1"><![CDATA[Category Clone]]></hook>
+  </hooks>
+</installer>

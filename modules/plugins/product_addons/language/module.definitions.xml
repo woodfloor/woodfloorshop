@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions version="1.0">
+ <group name="product_addons">
+  <string name="package_size"><![CDATA[Box Size]]></string>
+
+ </group>
+</definitions>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<installer version="1.0">
+  <info>
+	<uid>relatedproducts@semperfiwebservices.com</uid>
+	<type>plugins</type>
+	<folder>SFWS_Related_Products</folder>
+	<name><![CDATA[Related Products]]></name>
+	<description><![CDATA[Related Products Plugin By SemperFiWebServices]]></description>
+	<version>6.0.2</version>
+	<minVersion>6.0.0a</minVersion>
+	<maxVersion>6.0.*</maxVersion>
+	<creator><![CDATA[SemperFiWebServices]]></creator>
+	<homepage><![CDATA[http://www.semperfiwebservices.com]]></homepage>
+    <version_check_url><![CDATA[www.semperfiwebservices.com/version-check/cc6-plugins/SFWS_Related_Products.txt]]></version_check_url>
+    <update_url><![CDATA[https://www.semperfiwebservices.com/]]></update_url>
+  </info>
+  <hooks>
+	<hook trigger="admin.navigation" enabled="1"><![CDATA[Admin Navigation Menu Items]]></hook>
+	<hook trigger="admin.manage_related_products" enabled="1"><![CDATA[Admin Manage Related Products]]></hook>
+	<hook trigger="admin.product.tabs" enabled="1"><![CDATA[Admin Add/Edit Product Related Products Tabs]]></hook>
+	<hook trigger="admin.product.save.post_process" enabled="1"><![CDATA[Admin Add/Edit Product Related Products]]></hook>
+	<hook trigger="class.gui.display" enabled="1"><![CDATA[Display Related Products]]></hook>
+	<hook trigger="class.cart.add.preredirect" enabled="1"><![CDATA[Reload Checkout Page]]></hook>
+  </hooks>
+</installer>

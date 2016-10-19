@@ -1,0 +1,352 @@
+<?php
+class sfws_related_products {
+
+	public $_module_config = array();
+
+	public $_language_strings = array();
+	
+	public function __construct($module_config = null) {
+
+		$this->_module_config = is_array($module_config) ? $module_config : $GLOBALS['config']->get('sfws_related_products');
+		
+		$GLOBALS['language']->loadDefinitions('sfws_related_products', 'modules/plugins/SFWS_Related_Products/language', 'module.definitions.xml');
+		$this->_language_strings = $GLOBALS['language']->getStrings('sfws_related_products');
+	}
+
+	public function manage_related_products() {
+
+		$GLOBALS['gui']->changeTemplateDir('modules/plugins/SFWS_Related_Products/skin/admin');
+		
+		$GLOBALS['smarty']->assign('MODULE_LANG',$this->_language_strings);
+
+		$GLOBALS['gui']->addBreadcrumb($this->_language_strings['admin_manage_breadcrumb'], $glob['adminFile'].'?_g=plugin&name=manage_related_products');
+
+		$GLOBALS['main']->addTabControl($this->_language_strings['admin_manage_tab'], 'general', $glob['adminFile'].'?_g=plugin&name=manage_related_products');
+
+		if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PERM_EDIT)) {
+			if(isset($_POST['active_product_id']) && is_numeric($_POST['active_product_id']) && isset($_POST['active_cat_id']) && is_numeric($_POST['active_cat_id'])){
+				if (isset($_POST['related_products']) && is_array($_POST['related_products'])) {
+					$product_id = $_POST['active_product_id'];
+					if (($rpbefore = $GLOBALS['db']->select('CubeCart_sfws_related_products', array('related_product_id', 'main_product_id'), array('main_product_id' => (int)$product_id))) !== false) {
+						$rp_hash_before = md5(serialize($rpbefore));
+					} else {
+						$rpbefore = 0;
+						$rp_hash_before = md5(serialize($rpbefore));
+					}
+					if (($current_rp_products = $GLOBALS['db']->select('CubeCart_sfws_related_products', array('related_product_id'), array('main_product_id' => (int)$product_id))) !== false) {
+						foreach ($current_rp_products as $current_rp_product) {
+							$current_rp_array[]	= $current_rp_product['related_product_id'];
+						}
+					}
+					foreach ($_POST['related_products'] as $product_id_r => $value) {
+						$rp_data['main_product_id']		= (int)$product_id;
+						$rp_data['related_product_id']	= (int)$product_id_r;
+						if(isset($current_rp_array) && is_array($current_rp_array)){
+							if($value==1 && !in_array($product_id_r, $current_rp_array)){
+								$GLOBALS['db']->insert('CubeCart_sfws_related_products',$rp_data);
+							}
+							if($value==0 && in_array($product_id_r, $current_rp_array)){
+								$GLOBALS['db']->delete('CubeCart_sfws_related_products', $rp_data);
+							}
+						} else {
+							if($value==1){
+								$GLOBALS['db']->insert('CubeCart_sfws_related_products',$rp_data);
+							}
+							if($value==0){
+								$GLOBALS['db']->delete('CubeCart_sfws_related_products', $rp_data);
+							}
+						}
+					}
+					if (($rpafter = $GLOBALS['db']->select('CubeCart_sfws_related_products', array('related_product_id', 'main_product_id'), array('main_product_id' => (int)$product_id))) !== false) {
+						$rp_hash_after = md5(serialize($rpafter));
+					} else {
+						$rpafter = 0;
+						$rp_hash_after = md5(serialize($rpafter));
+					}
+					if (isset($rp_hash_before, $rp_hash_after) && $rp_hash_before !== $rp_hash_after) $updated = true;
+					if ($updated) {
+						$GLOBALS['main']->setACPNotify($this->_language_strings['admin_manage_page_notify']);
+					} else {
+						$GLOBALS['main']->setACPWarning($this->_language_strings['admin_manage_page_error']);
+					}
+				}
+			}
+		}
+
+		$cat_dropdown = $GLOBALS['catalogue']->buildCategoriesDropDown();
+		if(!empty($cat_dropdown)){
+			$GLOBALS['smarty']->assign('CAT_LIST', $cat_dropdown);
+			$GLOBALS['smarty']->assign('CURRENT_CAT', (isset($_GET['cat_id'])) ? $_GET['cat_id'] : '');
+			$GLOBALS['smarty']->assign('DISPLAY_CATEGORIES',true);
+		}
+
+		if(isset($_GET['cat_id']) && is_numeric($_GET['cat_id'])){
+			if(($products = $GLOBALS['db']->select('CubeCart_inventory', array('product_id', 'product_code', 'name'), array('cat_id' => $_GET['cat_id']), array('product_code' => 'ASC'))) !== false) {
+				foreach ($products as $product) {
+					$product['product_id']		= $product['product_id'];
+					$product['product_code']	= $product['product_code'];
+					$product['name']			= $product['name'];
+					$product['formatted_name']	= $product['product_code'].' - ('.$product['product_id'].') - '.$product['name'];
+					$smarty_data['products'][]	= $product;
+				}
+				$GLOBALS['smarty']->assign('PRODUCTS', $smarty_data['products']);
+				$GLOBALS['smarty']->assign('CURRENT_PRODUCT', (isset($_GET['product_id'])) ? $_GET['product_id'] : '');
+				$GLOBALS['smarty']->assign('DISPLAY_PRODUCTS',true);
+			}
+		}
+
+		if(isset($_GET['cat_id']) && is_numeric($_GET['cat_id']) && isset($_GET['product_id']) && is_numeric($_GET['product_id'])){
+			$cat_dropdown_from = $GLOBALS['catalogue']->buildCategoriesDropDown();
+			if(!empty($cat_dropdown_from)){
+				$GLOBALS['smarty']->assign('CAT_LIST_FROM', $cat_dropdown_from);
+				$GLOBALS['smarty']->assign('CURRENT_CAT_FROM', (isset($_GET['from_cat_id'])) ? $_GET['from_cat_id'] : '');
+				$GLOBALS['smarty']->assign('DISPLAY_CATEGORIES_FROM',true);
+			}
+		}
+
+		if(isset($_GET['cat_id']) && is_numeric($_GET['cat_id']) && isset($_GET['product_id']) && is_numeric($_GET['product_id']) && isset($_GET['from_cat_id']) && is_numeric($_GET['from_cat_id'])){
+
+			$active_product_id  = $_GET['product_id'];
+			$active_category_id = $_GET['from_cat_id'];
+
+			if (($related_products_list = $GLOBALS['db']->select('CubeCart_sfws_related_products', array('related_product_id'), array('main_product_id' => (int)$active_product_id))) !== false) {
+				foreach ($related_products_list as $related_product) {
+					if ((int)$related_product['related_product_id'] == 0) continue;
+					$related_products_selected[] 	= (int)$related_product['related_product_id'];
+				}
+			}
+
+			$related_products = $GLOBALS['db']->misc('SELECT name, product_id, product_code FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_inventory` WHERE product_id != '.$active_product_id.' AND cat_id = '.$active_category_id.' ORDER BY name ASC');
+
+			if ($related_products) {
+				foreach ($related_products as $related_product) {
+					if(($related_product['product_id'] != $main_product_id) && !empty($related_product['name'])){
+						if (($image = $GLOBALS['db']->select('CubeCart_image_index', 'file_id', array('product_id' => $related_product['product_id'], 'main_img' => 1))) !== false) {
+							$main_image = $GLOBALS['catalogue']->imagePath($image[0]['file_id'], 'small');
+						} else {
+							$main_image = '';
+						}
+						$data	= array(
+							'product_id'	=> $related_product['product_id'],
+							'name'			=> $related_product['name'],
+							'product_code'	=> $related_product['product_code'],
+							'main_image'	=> $main_image,
+							'yes_checked'	=> (isset($related_products_selected) && in_array($related_product['product_id'], $related_products_selected)) ? ' checked' : '',
+							'no_checked'	=> (!isset($related_products_selected) || (isset($related_products_selected) && !in_array($related_product['product_id'], $related_products_selected))) ? ' checked' : '',
+						);
+						$smarty_data['related_products'][]	= $data;
+					}
+				}
+				$GLOBALS['smarty']->assign('ACTIVE_PRODUCT_ID', $active_product_id);
+				$GLOBALS['smarty']->assign('ACTIVE_CAT_ID', $active_category_id);
+				$GLOBALS['smarty']->assign('RELATED_PRODUCTS', $smarty_data['related_products']);
+			}
+			$GLOBALS['smarty']->assign('DISPLAY_RELATED_PRODUCTS',true);
+		}
+
+		$html_out = $GLOBALS['smarty']->fetch('manage_related_products.php');
+		
+		$GLOBALS['gui']->changeTemplateDir();
+		return $html_out;
+
+	}
+	
+	public function display_related_products_pp() {
+
+		if(isset($_GET['product_id']) && is_numeric($_GET['product_id'])){
+
+			$get_module_status	= $GLOBALS['db']->select('CubeCart_modules', array('status'), array('folder' => 'SFWS_Related_Products'));
+			$module_status = $get_module_status[0]['status'];
+
+			$GLOBALS['gui']->changeTemplateDir('modules/plugins/SFWS_Related_Products/skin/');
+			
+			$GLOBALS['smarty']->assign('MODULE_CONFIG',$this->_module_config);
+			$GLOBALS['smarty']->assign('MODULE_LANG',$this->_language_strings);
+
+			if($module_status == 1 && $this->_module_config['sfws_related_products_product_pages_status'] == 1){
+				if($this->_module_config['sfws_related_products_product_pages_amount']){
+					$rp_limit = $this->_module_config['sfws_related_products_product_pages_amount'];
+				} else {
+					$rp_limit = 3;
+				}
+				if($GLOBALS['config']->get('config', 'hide_out_of_stock')) {
+					$stock_where_manual = " AND ((I.use_stock_level = '0') OR (I.use_stock_level = '1' AND I.stock_level > 0))";
+				}
+				$current_product_id  = $_GET['product_id'];
+				$get_category_id = $GLOBALS['db']->select('CubeCart_category_index', false, array('product_id' => (int)$current_product_id, 'primary' => 1), array('priority' => 'DESC'), 1);
+				$current_category_id = $get_category_id[0]['cat_id'];
+				$seed = mt_rand(1, 10000);
+				$related_products_type = '';
+				$get_related_products_manual_query = "SELECT R.related_product_id, I.* FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_sfws_related_products AS R INNER JOIN ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_inventory AS I ON R.related_product_id = I.product_id WHERE R.main_product_id = ".$current_product_id." AND I.status = 1 ".$stock_where_manual." ORDER BY RAND(".$seed.") LIMIT ".$rp_limit;
+				$related_products_manual = $GLOBALS['db']->misc($get_related_products_manual_query);
+				if (is_array($related_products_manual) && !empty($related_products_manual)){
+					$sfws_related_products = $related_products_manual;
+					$sfws_related_products_type = 'Manual';
+				} else {
+					if($this->_module_config['sfws_related_products_product_pages_random_status'] == 1){
+						if($GLOBALS['config']->get('config', 'hide_out_of_stock')) {
+							$stock_where_auto = " AND ((use_stock_level = '0') OR (use_stock_level = '1' AND stock_level > 0))";
+						}
+						$get_related_products_auto_query = "SELECT * FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_inventory WHERE product_id != ".$current_product_id." AND cat_id = ".$current_category_id." AND status = 1 ".$stock_where_auto." ORDER BY RAND(".$seed.") LIMIT ".$rp_limit;
+						$related_products_auto = $GLOBALS['db']->misc($get_related_products_auto_query);
+						if (is_array($related_products_auto) && !empty($related_products_auto)){
+							$sfws_related_products = $related_products_auto;
+							$sfws_related_products_type = 'Auto';
+						}
+					}
+				}
+				if (is_array($sfws_related_products) && !empty($sfws_related_products)) {
+					foreach ($sfws_related_products as $related_product) {
+						if($sfws_related_products_type == "Manual"){
+							$related_product['related_product_id'] = $related_product['related_product_id'];
+						} else {
+							$related_product['related_product_id'] = $related_product['product_id'];
+						}
+						$category_data = $GLOBALS['catalogue']->getCategoryStatusByProductID($related_product['related_product_id']);
+						$category_status = false;
+						if (is_array($category_data)) {
+							foreach ($category_data as $trash => $data) {
+								if ($data['status'] == 1) {
+									$category_status = true;
+								}
+							}
+						}
+						if (!$category_status) {
+							continue;
+						}
+						$GLOBALS['language']->translateProduct($related_product);
+						$related_product['image'] = $GLOBALS['gui']->getProductImage($related_product['product_id'], 'small');
+						$related_product['ctrl_sale'] = (!$GLOBALS['tax']->salePrice($related_product['price'], $related_product['sale_price']) || !$GLOBALS['config']->get('config', 'catalogue_sale_mode')) ? false : true;
+						$GLOBALS['catalogue']->getProductPrice($related_product);
+						$related_product_sale = $GLOBALS['tax']->salePrice($related_product['price'], $related_product['sale_price']);
+						
+						$m2_amount = ($related_product['calc_packm2']>1) ? $related_product['calc_packm2'] : 1;
+						$sale = $GLOBALS['tax']->salePrice($related_product['price'], $related_product['sale_price']);
+
+						$related_product['price_unformatted'] = $related_product['price']/$m2_amount;
+						$related_product['sale_price_unformatted'] = ($sale) ? $related_product['sale_price']/$m2_amount : null;
+						$related_product['price'] = $GLOBALS['tax']->priceFormat($related_product['price']/$m2_amount);
+						$related_product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($related_product['sale_price']/$m2_amount) : null;
+						$related_product['ctrl_stock'] = (!$related_product['use_stock_level'] || $GLOBALS['config']->get('config', 'basket_out_of_stock_purchase') || ($related_product['use_stock_level'] && $GLOBALS['catalogue']->getProductStock($related_product['product_id'], null, true))) ? true : false;
+						$related_product['url'] = $GLOBALS['seo']->buildURL('prod', $related_product['product_id'], '&amp;');
+						$varsRelatedProducts[] = $related_product;
+					}
+					$GLOBALS['smarty']->assign('RELATED_PRODUCTS_TYPE', $related_products_type);
+					$GLOBALS['smarty']->assign('RELATED_PRODUCTS', $varsRelatedProducts);
+				}
+			}
+			
+			$html_out = $GLOBALS['smarty']->fetch('display_related_products_pp.php');
+			
+			$GLOBALS['gui']->changeTemplateDir();
+			return $html_out;
+
+		}
+
+	}
+
+	public function display_related_products_cp() {
+
+		if (in_array($_GET['_a'], array('basket', 'cart', 'confirmed'))) {
+
+			$get_module_status	= $GLOBALS['db']->select('CubeCart_modules', array('status'), array('folder' => 'SFWS_Related_Products'));
+			$module_status = $get_module_status[0]['status'];
+
+			$GLOBALS['gui']->changeTemplateDir('modules/plugins/SFWS_Related_Products/skin/');
+			
+			$GLOBALS['smarty']->assign('MODULE_CONFIG',$this->_module_config);
+			$GLOBALS['smarty']->assign('MODULE_LANG',$this->_language_strings);
+
+			if($module_status == 1 && $this->_module_config['sfws_related_products_checkout_pages_status'] == 1){
+				if($this->_module_config['sfws_related_products_checkout_pages_amount']){
+					$rp_limit = $this->_module_config['sfws_related_products_checkout_pages_amount'];
+				} else {
+					$rp_limit = 3;
+				}
+				if (($rp_contents = $GLOBALS['cart']->get()) !== false) {
+					foreach ($rp_contents as $hash => $product) {
+						if ($product['product_id']) {
+							$product_list[]	= $product['product_id'];
+							if (($main_cat_id = $GLOBALS['db']->select('CubeCart_inventory', array('cat_id'), array('product_id' => (int)$product['product_id']))) !== false) {
+								$category_list[] = $main_cat_id[0]['cat_id'];
+							}
+						}
+					}
+					$basket_products = implode(",",$product_list);
+					$basket_categories = implode(",",$category_list);
+					if($GLOBALS['config']->get('config', 'hide_out_of_stock')) {
+						$stock_where_manual = " AND ((I.use_stock_level = '0') OR (I.use_stock_level = '1' AND I.stock_level > 0))";
+					}
+					$seed = mt_rand(1, 10000);
+					$get_related_products_manual_query = "SELECT R.related_product_id, I.* FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_sfws_related_products AS R INNER JOIN ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_inventory AS I ON R.related_product_id = I.product_id WHERE R.main_product_id IN (".$basket_products.") AND R.related_product_id NOT IN (".$basket_products.") AND I.status = 1 ".$stock_where_manual." GROUP BY R.related_product_id ORDER BY RAND(".$seed.") LIMIT ".$rp_limit;
+					$related_products_manual = $GLOBALS['db']->query($get_related_products_manual_query);
+					if (is_array($related_products_manual) && !empty($related_products_manual)){
+						$sfws_related_products = $related_products_manual;
+						$sfws_related_products_type = 'Manual';
+					} else {
+						if($this->_module_config['sfws_related_products_checkout_pages_random_status'] == 1){
+							if($GLOBALS['config']->get('config', 'hide_out_of_stock')) {
+								$stock_where_auto = " AND ((use_stock_level = '0') OR (use_stock_level = '1' AND stock_level > 0))";
+							}
+							$get_related_products_auto_query = "SELECT * FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_inventory WHERE cat_id IN (".$basket_categories.") AND product_id NOT IN (".$basket_products.") AND status = 1 ".$stock_where_auto." GROUP BY product_id ORDER BY RAND(".$seed.") LIMIT ".$rp_limit;
+							$related_products_auto = $GLOBALS['db']->query($get_related_products_auto_query);
+							if (is_array($related_products_auto) && !empty($related_products_auto)){
+								$sfws_related_products = $related_products_auto;
+								$sfws_related_products_type = 'Auto';
+							}
+						}
+					}
+					if (is_array($sfws_related_products) && !empty($sfws_related_products)) {
+						foreach ($sfws_related_products as $related_product) {
+							if($sfws_related_products_type == "Manual"){
+								$related_product['related_product_id'] = $related_product['related_product_id'];
+							} else {
+								$related_product['related_product_id'] = $related_product['product_id'];
+							}
+							if(!in_array($related_product['related_product_id'], $product_list)){
+								$category_data = $GLOBALS['catalogue']->getCategoryStatusByProductID($related_product['related_product_id']);
+								$category_status = false;
+								if (is_array($category_data)) {
+									foreach ($category_data as $trash => $data) {
+										if ($data['status'] == 1) {
+											$category_status = true;
+										}
+									}
+								}
+								if (!$category_status) {
+									continue;
+								}
+								$GLOBALS['language']->translateProduct($related_product);
+								$related_product['image'] = $GLOBALS['gui']->getProductImage($related_product['product_id'], 'small');
+								$related_product['ctrl_sale'] = (!$GLOBALS['tax']->salePrice($related_product['price'], $related_product['sale_price']) || !$GLOBALS['config']->get('config', 'catalogue_sale_mode')) ? false : true;
+								$GLOBALS['catalogue']->getProductPrice($related_product);
+								$related_product_sale = $GLOBALS['tax']->salePrice($related_product['price'], $related_product['sale_price']);
+								$m2_amount = ($related_product['calc_packm2']>1) ? $related_product['calc_packm2'] : 1;
+								$sale = $GLOBALS['tax']->salePrice($related_product['price'], $related_product['sale_price']);
+
+								$related_product['price_unformatted'] = $related_product['price']/$m2_amount;
+								$related_product['sale_price_unformatted'] = ($sale) ? $related_product['sale_price']/$m2_amount : null;
+								$related_product['price'] = $GLOBALS['tax']->priceFormat($related_product['price']/$m2_amount);
+								$related_product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($related_product['sale_price']/$m2_amount) : null;
+								$related_product['ctrl_stock'] = (!$related_product['use_stock_level'] || $GLOBALS['config']->get('config', 'basket_out_of_stock_purchase') || ($related_product['use_stock_level'] && $GLOBALS['catalogue']->getProductStock($related_product['product_id'], null, true))) ? true : false;
+								$related_product['url'] = $GLOBALS['seo']->buildURL('prod', $related_product['product_id'], '&amp;');
+								$varsRelatedProducts[] = $related_product;
+							}
+						}
+						$GLOBALS['smarty']->assign('RELATED_PRODUCTS_TYPE', $related_products_type);
+						$GLOBALS['smarty']->assign('RELATED_PRODUCTS', $varsRelatedProducts);
+					}
+				}
+			}
+			
+			$html_out = $GLOBALS['smarty']->fetch('display_related_products_cp.php');
+			
+			$GLOBALS['gui']->changeTemplateDir();
+			return $html_out;
+
+		}
+
+	}
+	
+}
+?>

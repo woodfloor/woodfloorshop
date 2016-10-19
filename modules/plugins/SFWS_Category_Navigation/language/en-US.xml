@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<language version="1.0">
+  <info>
+    <title>English US</title>
+    <code>en_US</code>
+    <character_set>utf-8</character_set>
+    <version>1.0.0</version>
+    <minVersion>6.0.0a</minVersion>
+    <maxVersion>6.0.*</maxVersion>
+  </info>
+  <translation>
+    <string>
+      <name>module_title</name>
+      <value><![CDATA[Category Navigation Plugin]]></value>
+      <type>sfws_category_navigation</type>
+    </string>
+  </translation>
+</language>

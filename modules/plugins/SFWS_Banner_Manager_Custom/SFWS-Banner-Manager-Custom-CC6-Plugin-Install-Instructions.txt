@@ -1,0 +1,186 @@
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                            SemperFiWebServices Plugin Information                            ###
+###                              http://www.semperfiwebservices.com                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###   Modification : Banner Manager Custom CC6 Plugin                                            ###
+###   Version      : Custom                                                                      ###
+###   Target       : CubeCart 6.X.X                                                              ###
+###   Tested With  : 6.0.8                                                                       ###
+###                                                                                              ###
+###   With this plugin you can display banners in your store.                                    ###
+###                                                                                              ###
+###   You can display banners in the following locations:                                        ###
+###   - header (manufacturer based)                                                              ###
+###   - side box (manufacturer based)                                                            ###
+###   - footer                                                                                   ###
+###                                                                                              ###
+###   For each location you can:                                                                 ###
+###   - set to enabled/disabled                                                                  ###
+###   - set multiple images to be displayed                                                      ###
+###   - set the banner dimensions (width and height)                                             ###
+###   - set the transition effect used between images                                            ###  
+###                                                                                              ###
+###   For each image you can:                                                                    ###
+###   - set to enabled/disabled                                                                  ###
+###   - set display order                                                                        ###
+###   - set display location                                                                     ###
+###   - set a name                                                                               ###
+###   - set a URL and URL target (same or new window)                                            ###
+###   - set image dimensions (width and height)                                                  ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###                                    Disclaimer + Copyright                                    ###
+###                                                                                              ###
+###   Always backup your files and database before you install any modification.                 ###
+###   This modification is offered without any warranty.                                         ###
+###   Please do not distribute this modification in any manner.                                  ###
+###   Modification is owned by and © SemperFiWebServices.                                        ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###                                  Installation Instructions                                   ###
+###                                                                                              ###
+
+**********************
+* Start File Uploads *
+**********************
+
+Upload the 'SFWS_Banner_Manager_Custom' directory to the stores '/modules/plugins/ directory.
+These are all new files.
+No existing files are overwritten.
+
+********************
+* End File Uploads *
+********************
+
+********************
+* Start File Edits *
+********************
+
+Step 1
+------
+
+Open "/skins/{YOUR-SKIN}/templates/main.php" in your favourite text editor.
+
+Find This:
+</head>
+
+Above That Add This:
+<script type="text/javascript" src="{$STORE_URL}/modules/plugins/SFWS_Banner_Manager_Custom/js/jquery.cycle.all.js"></script>
+
+Note:
+In certain CC5 skins, you might need to add these 3 lines instead:
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{$STORE_URL}/modules/plugins/SFWS_Banner_Manager_Custom/js/jquery.cycle.all.js"></script>
+
+If you do need to do that, the first 2 lines above should then be removed from the '/js/common.html' file.
+
+Step 2
+------
+
+To show the banners in the store these macros:
+{$SFWS_BANNER_MANAGER_CUSTOM_HEADER}
+{$SFWS_BANNER_MANAGER_CUSTOM_SIDE}
+{$SFWS_BANNER_MANAGER_CUSTOM_FOOTER}
+need to be added in your skin's main.php template file.
+
+Note:
+The design can be altered in these files:
+/modules/plugins/SFWS_Banner_Manager_Custom/skin/sfws_banner_manager_custom_header.php
+/modules/plugins/SFWS_Banner_Manager_Custom/skin/sfws_banner_manager_custom_side.php
+/modules/plugins/SFWS_Banner_Manager_Custom/skin/sfws_banner_manager_custom_footer.php
+
+Step 3
+------
+
+Open "/skins/{YOUR-SKIN}/config.xml" in your favourite text editor.
+
+Find This:
+	<image reference="large" maximum="600" quality="90" default="" /><!-- Doesnt need a default -->
+
+Below That Add This:
+	<!-- Start SemperFi Addition -->
+	<image reference="sfws_banner_manager_custom_header" maximum="1000" quality="100" default="" /><!-- Doesnt need a default -->
+	<image reference="sfws_banner_manager_custom_side" maximum="1000" quality="100" default="" /><!-- Doesnt need a default -->
+	<image reference="sfws_banner_manager_custom_footer" maximum="1000" quality="100" default="" /><!-- Doesnt need a default -->
+	<!-- End SemperFi Addition -->
+
+
+Save + Upload
+
+Note: If your banner images are greater than 1000px (any dimension) then set 'maximum' above to the largest dimension.
+
+******************
+* End File Edits *
+******************
+
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                        Configuration                                         ###
+###                                                                                              ###
+###   Clear The Language Cache                                                                   ### 
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Maintenance' in the 'Advanced' section.                                       ###
+###   3. Click on the 'Rebuild' tab.                                                             ###
+###   4. Tick the box for 'Clear language cache' in the 'cache' section.                         ###
+###   5. Click on the 'Submit' button.                                                           ###
+###                                                                                              ###
+###   Configure The Plugin                                                                       ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage Plugins' in the 'Plugins' section.                                     ###
+###   3. Click on the 'Banner Manager Custom' link.                                              ###
+###   4. Set your desired settings.                                                              ###
+###   5. Click Save.                                                                             ###
+###                                                                                              ###
+###   Activate The Hooks                                                                         ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage Hooks' in the 'Settings' section.                                      ###
+###   3. Click on 'SFWS Banner Manager Custom'.                                                  ###
+###   4. Click Save.                                                                             ###
+###                                                                                              ###
+###   Manage Banners                                                                             ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage' in the 'Banner Manager Custom' section.                               ###
+###   3. Set your banner images as required.                                                     ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                      At this stage, the whole install is now completed.                      ###
+###                                      Congratulations!                                        ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################

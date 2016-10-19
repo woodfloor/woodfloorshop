@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<language version="1.0">
+  <info>
+    <title>Spanish</title>
+    <code>es_ES</code>
+    <character_set>utf-8</character_set>
+    <version>1.0.0</version>
+    <minVersion>6.0.0a</minVersion>
+    <maxVersion>6.0.*</maxVersion>
+  </info>
+  <translation>
+    <string>
+      <name>module_title</name>
+      <value><![CDATA[Banner Manager Custom Plugin]]></value>
+      <type>sfws_banner_manager_custom</type>
+    </string>
+  </translation>
+</language>

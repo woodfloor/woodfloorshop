@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions version="1.0">
+ <group name="e_Payments_Interac">
+  <string name="bank_account_name"><![CDATA[Account Holders Name]]></string>
+  <string name="bank_allow"><![CDATA[Allow bank transfers?]]></string>
+  <string name="bank_name"><![CDATA[Bank Name]]></string>
+  <string name="address"><![CDATA[e-Payment Email Address:]]></string>
+  <string name="bank_secret"><![CDATA[e-Payment Secret Question ?]]></string>
+  <string name="bank_answer"><![CDATA[Answer to Secret e-Payment Question ? ]]></string>  
+  <string name="module_title"><![CDATA[e-Payments Interac]]></string>
+  <string name="notes"><![CDATA[Notes to customer]]></string>
+  <string name="confirmation_email"><![CDATA[Send order confirmation email?]]></string>
+  <string name="title_bank_transfer"><![CDATA[e-Payments by Interac]]></string>
+ </group>
+</definitions>

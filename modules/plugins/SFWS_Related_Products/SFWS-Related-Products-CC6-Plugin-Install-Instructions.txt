@@ -1,0 +1,244 @@
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                            SemperFiWebServices Plugin Information                            ###
+###                              http://www.semperfiwebservices.com                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###   Modification : Related Products CC6 Plugin                                                 ###
+###   Version      : 6.0.2                                                                       ###
+###   Target       : CubeCart 6.X.X                                                              ###
+###   Tested With  : 6.0.12                                                                      ###
+###                                                                                              ###
+###   With this plugin you can display specific or random related products for each product      ### 
+###   in your store.                                                                             ###
+###                                                                                              ###
+###   Related products get displayed on:                                                         ###
+###   - product pages                                                                            ###
+###   - checkout pages                                                                           ###
+###                                                                                              ###
+###   You can separately define how many related products are displayed for each location.       ###
+###   Each location can be enabled/disabled.                                                     ###
+###                                                                                              ###
+###   This plugin adds a new page in the store admin where you can:                              ###
+###   - select a category to select a product from                                               ###
+###   - select a product to assign related products to                                           ###
+###   - select a category to select related products from                                        ###
+###   - assign the related products                                                              ###
+###                                                                                              ###
+###   Related products can also be assigned via the Related Products tab when editing a product. ###
+###                                                                                              ###
+###   When no related products have been assigned to a product, you can optionally set random    ###
+###   products to be displayed.                                                                  ###
+###   Random products are retrieved from same category as the product currently being viewed.    ###
+###                                                                                              ###
+###   Products that are out of stock do not get displayed as related products.                   ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###                                    Disclaimer + Copyright                                    ###
+###                                                                                              ###
+###   Always backup your files and database before you install any modification.                 ###
+###   This modification is offered without any warranty.                                         ###
+###   Please do not distribute this modification in any manner.                                  ###
+###   Modification is owned by and © SemperFiWebServices.                                        ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###                                  Installation Instructions                                   ###
+###                                                                                              ###
+
+**********************
+* Start File Uploads *
+**********************
+
+Upload the 'SFWS_Related_Products' directory to the stores '/modules/plugins/ directory.
+These are all new files.
+No existing files are overwritten.
+
+********************
+* End File Uploads *
+********************
+
+********************
+* Start File Edits *
+********************
+
+To show related products on product pages the macro:
+{$SFWS_RELATED_PRODUCTS_PP} 
+needs to be added in your skin's 'main.php' template file.
+
+Example
+               <div class="small-12 large-9 columns" id="main_content">
+                  {include file='templates/box.errors.php'}
+                  {include file='templates/box.progress.php'}
+                  {$PAGE_CONTENT}
+                  {$SFWS_RELATED_PRODUCTS_PP}
+               </div>
+
+Note:
+The design can be altered in this file:
+/modules/plugins/SFWS_Related_Products/skin/display_related_products_pp.php
+
+To show related products on checkout pages the macro 
+{$SFWS_RELATED_PRODUCTS_CP} 
+needs to be added in your skin's 'main.checkout.php' template file.
+
+Example
+               <div class="small-12 large-12 columns">
+                  {include file='templates/box.errors.php'}
+                  {$PAGE_CONTENT}
+                  {$SFWS_RELATED_PRODUCTS_CP}
+               </div>
+
+Note:
+The design can be altered in this file:
+/modules/plugins/SFWS_Related_Products/skin/display_related_products_cp.php
+
+******************
+* End File Edits *
+******************
+
+**************************************
+* Start CubeCart < 6.0.11 File Edits *
+**************************************
+
+The following instructions only apply to stores running a CubeCart version lower than 6.0.11.
+They are not required for stores running CubeCart 6.0.11 or newer.
+
+************
+Start Step 1
+************
+
+Open '/modules/plugins/hooks.xml' in your favourite text editor.
+
+Find This:
+ <hook trigger="admin.product.import.format" deprecated="" />
+
+Below That Add This:
+ <hook trigger="admin.product.tabs" deprecated="" />
+
+
+Save + Upload
+
+**********
+End Step 1
+**********
+
+************
+Start Step 2
+************
+
+Open '/admin/sources/products.index.inc.php' in your favourite text editor.
+
+Find This:
+        $GLOBALS['smarty']->assign('FORM_HASH', md5(implode('', $result[0])));
+        $GLOBALS['smarty']->assign('DISPLAY_PRODUCT_FORM', true);
+
+Above That Add This:
+        foreach ($GLOBALS['hooks']->load('admin.product.tabs') as $hook) include $hook;
+        $GLOBALS['smarty']->assign('PLUGIN_TABS', $smarty_data['plugin_tabs']);
+
+
+Save + Upload
+
+**********
+End Step 2
+**********
+
+************
+Start Step 3
+************
+
+Open '/admin/skins/default/templates/products.index.php' in your favourite text editor.
+
+Find This:
+      <div><a href="{$TRANSLATE}">{$LANG.translate.trans_add}</a></div>
+   </div>
+   {/if}
+
+Below That Add This:
+   {if isset($PLUGIN_TABS)}
+      {foreach from=$PLUGIN_TABS item=tab}
+        {$tab}
+      {/foreach}
+   {/if}
+
+Save + Upload
+
+**********
+End Step 3
+**********
+
+************************************
+* End CubeCart < 6.0.11 File Edits *
+************************************
+
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                        Configuration                                         ###
+###                                                                                              ###
+###   Clear The Language Cache                                                                   ### 
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Maintenance' in the 'Advanced' section.                                       ###
+###   3. Click on the 'Rebuild' tab.                                                             ###
+###   4. Tick the box for 'Clear language cache' in the 'cache' section.                         ###
+###   5. Click on the 'Submit' button.                                                           ###
+###                                                                                              ###
+###   Configure The Plugin                                                                       ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage Plugins' in the 'Plugins' section.                                     ###
+###   3. Click on the 'Related Products' link.                                                   ###
+###   4. Set your desired settings.                                                              ###
+###   5. Click Save.                                                                             ###
+###                                                                                              ###
+###   Activate The Hooks                                                                         ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage Hooks' in the 'Settings' section.                                      ###
+###   3. Click on 'SFWS Related Products'.                                                       ###
+###   4. Click Save.                                                                             ###
+###                                                                                              ###
+###   Manage Related Products                                                                    ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage' in the 'Related Products' section.                                    ###
+###   3. Select the applicable category.                                                         ###
+###   4. Select the applicable product.                                                          ###
+###   5. Select the category to assign products from.                                            ###
+###   6. Set your related products as required.                                                  ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                      At this stage, the whole install is now completed.                      ###
+###                                      Congratulations!                                        ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<language version="1.0">
+  <info>
+    <title>French</title>
+    <code>fr_FR</code>
+    <character_set>utf-8</character_set>
+    <version>1.0.0</version>
+    <minVersion>6.0.0a</minVersion>
+    <maxVersion>6.0.*</maxVersion>
+  </info>
+  <translation>
+    <string>
+      <name>store_checkout_pages_title</name>
+      <value><![CDATA[Related Products]]></value>
+      <type>sfws_related_products</type>
+    </string>
+    <string>
+      <name>store_product_pages_title</name>
+      <value><![CDATA[Related Products]]></value>
+      <type>sfws_related_products</type>
+    </string>
+  </translation>
+</language>

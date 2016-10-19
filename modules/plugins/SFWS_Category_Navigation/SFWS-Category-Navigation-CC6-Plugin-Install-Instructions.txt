@@ -1,0 +1,158 @@
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                            SemperFiWebServices Plugin Information                            ###
+###                              http://www.semperfiwebservices.com                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###   Modification : Category Navigation CC6 Plugin                                              ###
+###   Version      : Custom                                                                      ###
+###   Target       : CubeCart 6.X.X                                                              ###
+###   Tested With  : 6.0.8                                                                       ###
+###                                                                                              ###
+###   With this plugin you can implement a custom category navigation box in your store.         ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###                                    Disclaimer + Copyright                                    ###
+###                                                                                              ###
+###   Always backup your files and database before you install any modification.                 ###
+###   This modification is offered without any warranty.                                         ###
+###   Please do not distribute this modification in any manner.                                  ###
+###   Modification is owned by and © SemperFiWebServices.                                        ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                                                                              ###
+###                                  Installation Instructions                                   ###
+###                                                                                              ###
+
+**********************
+* Start File Uploads *
+**********************
+
+Upload the 'SFWS_Category_Navigation' directory to the stores '/modules/plugins/' directory.
+These are all new files.
+No existing files are overwritten.
+
+********************
+* End File Uploads *
+********************
+
+********************
+* Start File Edits *
+********************
+
+************
+Start Step 1
+************
+
+Open "/skins/{YOUR-SKIN}/templates/main.php" in your favourite text editor.
+
+Find This:
+            <div class="row">
+               <div class="small-12 columns small-collapse">
+                  {include file='templates/box.navigation.php'}
+               </div>
+            </div>
+
+Replace That With This:
+            {$SFWS_CATEGORY_NAVIGATION_DESKTOP}
+
+
+Save + Upload
+
+Notes:
+The categories box design can be altered further in this file:
+/modules/plugins/SFWS_Category_Navigation/skin/box.sfws_category_navigation_desktop.php
+
+**********
+End Step 1
+**********
+
+************
+Start Step 2
+************
+
+Open "/skins/{YOUR-SKIN}/templates/box.off_canvas.left.php" in your favourite text editor.
+
+Find This:
+<aside class="left-off-canvas-menu">
+
+Below That Add This:
+   {$SFWS_CATEGORY_NAVIGATION_MOBILE}
+
+Save + Upload
+
+Notes:
+The categories box design can be altered further in these files:
+/modules/plugins/SFWS_Category_Navigation/skin/box.sfws_category_navigation_mobile.php
+/modules/plugins/SFWS_Category_Navigation/skin/element.sfws_navigation_tree_mobile.php
+
+**********
+End Step 2
+**********
+
+******************
+* End File Edits *
+******************
+
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                                        Configuration                                         ###
+###                                                                                              ###
+###   Clear The Language Cache                                                                   ### 
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Maintenance' in the 'Advanced' section.                                       ###
+###   3. Click on the 'Rebuild' tab.                                                             ###
+###   4. Tick the box for 'Clear language cache' in the 'cache' section.                         ###
+###   5. Click on the 'Submit' button.                                                           ###
+###                                                                                              ###
+###   Configure The Plugin                                                                       ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage Plugins' in the 'Plugins' section.                                     ###
+###   3. Click on the 'Category Navigation' link.                                                ###
+###   4. Set your desired settings.                                                              ###
+###   5. Click Save.                                                                             ###
+###                                                                                              ###
+###   Activate The Hooks                                                                         ###
+###   1. Log into your store admin.                                                              ###
+###   2. Click on 'Manage Hooks' in the 'Settings' section.                                      ###
+###   3. Click on 'SFWS Category Navigation'.                                                    ###
+###   4. Click Save.                                                                             ###
+###                                                                                              ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################
+
+####################################################################################################
+####################################################################################################
+#####                                                                                          #####
+###                      At this stage, the whole install is now completed.                      ###
+###                                      Congratulations!                                        ###
+#####                                                                                          #####
+####################################################################################################
+####################################################################################################

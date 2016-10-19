@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<installer version="1.0">
+  <info>
+    <uid>categorynavigation@semperfiwebservices.com</uid>
+    <type>plugins</type>
+    <folder>SFWS_Category_Navigation</folder>
+    <name><![CDATA[Category Navigation]]></name>
+    <description><![CDATA[Category Navigation Plugin By SemperFiWebServices.]]></description>
+    <version>Custom</version>
+    <minVersion>6.0.0a</minVersion>
+    <maxVersion>6.0.*</maxVersion>
+    <creator><![CDATA[SemperFiWebServices]]></creator>
+    <homepage><![CDATA[http://www.semperfiwebservices.com]]></homepage>
+  </info>
+  <hooks>
+    <hook trigger="class.gui.display" enabled="1"><![CDATA[Display Category Navigation]]></hook>
+  </hooks>
+</installer>

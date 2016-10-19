@@ -1,0 +1,9 @@
+/includes/global.inc.*
+/includes/extra/importdata.tmp
+/.DS_Store
+/Thumbs.db
+/cache/*
+/logs/*
+/backup/*
+/includes/extra/sess*
+/meta-update.php

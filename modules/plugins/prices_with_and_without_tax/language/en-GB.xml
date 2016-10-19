@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions version="1.0">
+ <group name="prices_with_and_without_tax">
+  <string name="inc_tax"><![CDATA[Inc VAT]]></string>
+  <string name="ex_tax"><![CDATA[Ex VAT]]></string>
+ </group>
+</definitions>
