@@ -18,4 +18,3 @@ https://support.cubecart.com/Knowledgebase/Article/View/230/43/how-do-i-upgrade-
 
 ## Upgrading from v3 to v6
 https://support.cubecart.com/Knowledgebase/Article/View/231/43/how-do-i-upgrade-from-cubecart-v3-to-v6
-# woodfloorshop

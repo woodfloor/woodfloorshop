@@ -7,3 +7,4 @@
 /backup/*
 /includes/extra/sess*
 /meta-update.php
+/images/cache/*
